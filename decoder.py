@@ -27,8 +27,9 @@ def main():
         encodedMsg += line
     efile.close()
 
-    randCharList = list(string.ascii_lowercase) + (list(string.ascii_uppercase))
-    for i in range(52):
+    # randCharList = list(string.ascii_lowercase) + (list(string.ascii_uppercase))
+    randCharList = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+    for i in range(len(randCharList)):
         secretChar = randCharList[i]
         decodedMsg = decode(encodedMsg, secretChar)
         print(randCharList[i] + " : " + decodedMsg)
