@@ -3,7 +3,7 @@ import string
 
 def encode(msg):
     # randCharList = list(string.ascii_lowercase) + (list(string.ascii_uppercase))
-    randCharList = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+    randCharList = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]^_`{|}~ ")
     #amount of fake letters changes every time
     encodeLength = random.randrange(50,70)
     #letter changes evry time
