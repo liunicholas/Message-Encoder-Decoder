@@ -1,11 +1,14 @@
 import random
 import string
 
+# randCharList = list(string.ascii_lowercase) + (list(string.ascii_uppercase))
+randCharList = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+
 def encode(msg):
     # randCharList = list(string.ascii_lowercase) + (list(string.ascii_uppercase))
-    randCharList = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+    # randCharList = list("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
     #amount of fake letters changes every time
-    encodeLength = random.randrange(50,70)
+    encodeLength = random.randrange(3,7)
     #letter changes evry time
     encodeChar = random.choice(randCharList)
     encodedMsg = ""
@@ -29,17 +32,32 @@ def encode(msg):
 
     return encodedMsg, encodeChar
 
-def main():
+def shiftCode(encodedMsg):
+    shiftLength = random.randrange(0,10)
+    newEncodedMsg = ""
+    for i in range(len(encodedMsg)):
+        currentIndex = randCharList.index(encodedMsg[i])
+        shiftedIndex = currentIndex + shiftLength
+        newIndex = shiftedIndex % len(randCharList)
+        newEncodedMsg+=randCharList[newIndex]
 
-    msg = ""
+    return encodedMsg, shiftLength
+
+def main():
+    encodedMsg = ""
     efile = open("msg.txt", 'r')
     for line in efile:
-        msg += line
+        encodedMsg += line
     efile.close()
 
-    encodedMsg, secretChar = encode(msg)
+    key = ""
+    for i in range(3):
+        encodedMsg, secretChar = encode(encodedMsg)
+        key+=secretChar
+        encodedMsg, secretShift = shiftCode(encodedMsg)
+        key+=str(secretShift)
 
     print("\n%s" % encodedMsg)
-    print("Secret character: %s\n" % secretChar)
+    print("\nkey: %s\n" % key)
 
 main()
