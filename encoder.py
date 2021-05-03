@@ -50,8 +50,10 @@ def main():
         encodedMsg += line
     efile.close()
 
+    levels = int(input("how many levels of encoding? "))
+
     key = ""
-    for i in range(3):
+    for i in range(levels):
         encodedMsg, secretChar = encode(encodedMsg)
         key+=secretChar
         encodedMsg, secretShift = shiftCode(encodedMsg)
@@ -59,5 +61,9 @@ def main():
 
     print("\n%s" % encodedMsg)
     print("\nkey: %s\n" % key)
+
+    efile = open("encodedMsg.txt", 'w')
+    efile.write(encodedMsg)
+    efile.close()
 
 main()
